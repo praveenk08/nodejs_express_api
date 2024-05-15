@@ -1,0 +1,2 @@
+I am Praveen Kumar, a Web Developer with 5+ years of experience in PHP technologies, specializing in CodeIgniter Framework. My expertise includes web application development, database design, and OOP concepts. I have successfully led teams to deliver projects on time and have a strong understanding of SDLC. My technical skills in PHP, JavaScript, jQuery, and MySQL, along with experience in E-Commerce applications. 
+Sincerely, Praveen Kumar
