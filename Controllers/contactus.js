@@ -3,6 +3,7 @@ import { Contact } from "../Models/Contactus.js";
 
 export const insertContactUs = async (req,res) =>{
     const contactRequest = req.body
+   
        try {
           await Contact.create(contactRequest);
           console.log('API contact',contactRequest);
