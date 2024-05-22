@@ -142,7 +142,7 @@ app.get('/login',(req,res) =>{
       psw:hashpass,
    });
 
-   if(!registerContact) return res.json({message:'no user registered '})
+   if(!registerContact) return res.status(404).json({message:'no user registered '})
 
 
    res.status(200).json({ registerContact, message: 'User registered successfully ' });
@@ -156,13 +156,13 @@ app.post('/api/login', async (req,res) =>{
    const {email,psw} = req.body
 
    let user = await User.findOne({email})
-   if (!user) res.json({msg:"User not found"});
+   if (!user) res.status(404).json({msg:"User not found"});
    
    let verifyPass = await bcrypt.compare(psw,user.psw)
 
-   if (!verifyPass) res.json({msg:"Invalid credential"});
+   if (!verifyPass) res.status(404).json({msg:"Invalid credential"});
 
-   res.json({msg:`Welcome back : ${user.name}`});
+   res.status(200).json({msg:`Welcome back : ${user.name}`});
 })
 
 
@@ -194,7 +194,7 @@ app.put('/api/contact-edit/:id',async (req,res) =>{
    const id = req.params.id
    const {name,email,mobile,subject}= req.body
    let updateContact = await Contact.findByIdAndUpdate(id,{name,email,mobile,subject},{new:true});// With id
-   if(!updateContact) return res.json({message:'no contact update '})
+   if(!updateContact) return res.status(404).json({message:'no contact update '})
 
    res.status(200).json({ updateContact, message: 'Contact list by id ' });
 })
@@ -204,9 +204,9 @@ app.delete('/api/contact-delete/:id',async (req,res) =>{
    const id = req.params.id
    let deleteContact = await Contact.findByIdAndDelete(id);// With id
 
-   if(!deleteContact) return res.json({message:'no contact delete '})
+   if(!deleteContact) return res.status(404).json({message:'no contact delete '})
 
-   res.json({ deleteContact, message: 'Contact delete by id ' });
+   res.status(200).json({ deleteContact, message: 'Contact delete by id ' });
 })
 
 
