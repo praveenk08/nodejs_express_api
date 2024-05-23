@@ -1,4 +1,7 @@
 import { User } from "../Models/Users.js";
+import bcrypt from 'bcrypt'
+
+import jwt from 'jsonwebtoken'
 
 export const userRegister = async (req,res) =>{
    
@@ -10,8 +13,29 @@ export const userRegister = async (req,res) =>{
 
  };
 
+export const login = async (req,res) =>{
+    
+   console.log('login req.body',req.body);
+   const {email,psw} = req.body
 
- export const fetchAllUser = async (req,res) =>{
+   if(email == "" || psw == "")
+      res.status(400).json({msg:"All Field are reqired"});
+
+   let user = await User.findOne({email})
+   if (!user) return res.status(404).json({msg:"User not found"});
+
+   let verifyPass = await bcrypt.compare(psw,user.psw)
+   
+   if (!verifyPass) res.status(404).json({msg:"Invalid credential"});
+   
+   // Useing jwt 
+   const jwttoken = jwt.sign({ userId : user._id }, 'nodeapi', {expiresIn:'1d'});
+
+   res.status(200).json({user,msg:`Welcome back : ${user.name}`,jwttoken});
+}
+
+
+export const fetchAllUser = async (req,res) =>{
    let user = await User.find(); 
    if(!user) return res.status(404).json({ message: 'No User Found' })    
    res.status(200).json({ user, message: 'User list' });

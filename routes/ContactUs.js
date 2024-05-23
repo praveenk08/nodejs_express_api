@@ -3,7 +3,9 @@ import { deleteContactbyid, fetchAllContact, fetchContactbyid, insertContactUs, 
 
 const router = express.Router();
 
-router.post('/add-query/', insertContactUs)
+import Authenticate from '../Middlewares/Auth.js';
+
+router.post('/add-query/', Authenticate, insertContactUs)
 
 router.get('/fetch-contact-list/',fetchAllContact)
 

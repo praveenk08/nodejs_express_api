@@ -1,11 +1,11 @@
 import express from 'express'
-import {userRegister, fetchAllUser, fetchUserbyid, updateUserbyid,deleteUserbyid } from '../Controllers/user.js';
+import {userRegister, login, fetchAllUser, fetchUserbyid, updateUserbyid,deleteUserbyid } from '../Controllers/user.js';
 
 const router = express.Router();
 
 router.post('/register/', userRegister)
 
-// router.get('/login/',login)
+router.post('/login/',login)
 
 router.get('/fetch-user-list',fetchAllUser)
 
