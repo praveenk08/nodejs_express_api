@@ -16,6 +16,8 @@ export const userRegister = async (req,res) =>{
 export const login = async (req,res) =>{
     
    console.log('login req.body',req.body);
+
+   console.log(`JWTKEY key ${process.env.JWTKEY}`)
    const {email,psw} = req.body
 
    if(email == "" || psw == "")
@@ -29,7 +31,7 @@ export const login = async (req,res) =>{
    if (!verifyPass) res.status(404).json({msg:"Invalid credential"});
    
    // Useing jwt 
-   const jwttoken = jwt.sign({ userId : user._id }, 'nodeapi', {expiresIn:'1d'});
+   const jwttoken = jwt.sign({ userId : user._id }, process.env.JWTKEY, {expiresIn:'1d'});
 
    res.status(200).json({user,msg:`Welcome back : ${user.name}`,jwttoken});
 }

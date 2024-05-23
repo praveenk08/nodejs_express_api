@@ -6,6 +6,7 @@ const router = express.Router();
 import Authenticate from '../Middlewares/Auth.js';
 
 router.post('/add-query/', Authenticate, insertContactUs)
+// router.post('/add-query/', insertContactUs)
 
 router.get('/fetch-contact-list/',fetchAllContact)
 
