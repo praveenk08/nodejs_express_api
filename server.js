@@ -11,13 +11,17 @@ const app = express();
 
 // add these lines to accept req body for POST call
 app.use(bodyPaser.json());
-app.use(express.json())
+// app.use(express.json())
 // ejs and express middlewire
 app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(path.resolve(), "public")));
 
-app.listen(port, () => console.log(`server is running from port ${port}`));
+app.listen(port, 
+    () => console.log(
+        `server is running from port ${port}`
+    )
+);
 
 
 
